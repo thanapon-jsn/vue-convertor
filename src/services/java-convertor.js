@@ -6,7 +6,7 @@ function convertOracleTypeToJava(textFields) {
          let fieldDetail = getFieldNameAndType(field);
 
          let fieldName = toCamelCase(fieldDetail[0]);
-         let fieldType = fieldDetail[1].replaceAll(/\s|,/g, "");
+         let fieldType = fieldDetail[1].replace(/\s|,/g, "");
 
          if (/VARCHAR2[(]\d{1,}[)]/gi.test(fieldType)) {
             fieldType = "String";
@@ -24,8 +24,7 @@ function convertOracleTypeToJava(textFields) {
 }
 
 function spiltFields(textFields) {
-    textFields = textFields.replace("\n", "")
-    return textFields.split(",");
+    return textFields.replace("\n", "").split(",");
 }
 
 function getFieldNameAndType(fieldData) {
