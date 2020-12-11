@@ -25,6 +25,7 @@ export default {
   methods: {
     clickToConvert: function () {
      let fieldsJava = convertOracleTypeToJava(this.textBox);
+     this.text = '';
      fieldsJava.forEach(fieldJava => {
        this.text += fieldJava + '\n';
      });

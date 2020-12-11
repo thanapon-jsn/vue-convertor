@@ -6,7 +6,7 @@ function convertOracleTypeToJava(textFields) {
          let fieldDetail = getFieldNameAndType(field);
 
          let fieldName = toCamelCase(fieldDetail[0]);
-         let fieldType = fieldDetail[1].replace(/\s|,/g, "");
+         let fieldType = fieldDetail[1].replace(/\s/g, "");
 
          if (/VARCHAR2[(]\d{1,}[)]/gi.test(fieldType)) {
             fieldType = "String";
@@ -14,6 +14,8 @@ function convertOracleTypeToJava(textFields) {
             fieldType = "Long";
          } else if (/NUMBER[(]\d{1,},\d{1,}[)]/gi.test(fieldType)) {
             fieldType = "BigDecimal";
+         } else if (/NUMBER/gi.test(fieldType)) {
+            fieldType = "Long";
          } else if (/DATE|TIMESTAMP/gi.test(fieldType)) {
             fieldType = "Date";
          }
@@ -24,11 +26,12 @@ function convertOracleTypeToJava(textFields) {
 }
 
 function spiltFields(textFields) {
-    return textFields.replace("\n", "").split(",");
+    return textFields.split(/,\n/);
 }
 
 function getFieldNameAndType(fieldData) {
    let fieldsData = fieldData.split(/\s+/);
+
    if (!fieldsData[0]) {
     fieldsData.splice(0, 1);
    }
