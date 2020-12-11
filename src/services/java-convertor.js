@@ -26,7 +26,7 @@ function convertOracleTypeToJava(textFields) {
 }
 
 function spiltFields(textFields) {
-    return textFields.split(/,\n/);
+    return textFields.split(/,\s+\n|,\n/gi);
 }
 
 function getFieldNameAndType(fieldData) {
